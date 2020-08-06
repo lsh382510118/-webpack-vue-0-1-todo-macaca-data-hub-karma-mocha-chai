@@ -1,0 +1,39 @@
+
+@import "@/assets/styles/_theme.scss";
+//此处用了sass的map遍历、函数、map存取、混合器等相关知识，
+//详细API参考https://www.sass.hk/docs/
+//遍历主题map
+@mixin themeify {
+  @each $theme-name, $theme-map in $themes {
+    //!global 把局部变量强升为全局变量
+    $theme-map: $theme-map !global;
+    //这步是判断html的data-theme的属性值  #{}是sass的插值表达式
+    //& sass嵌套里的父容器标识   @content是混合器插槽，像vue的slot
+    [data-theme="#{$theme-name}"] & {
+      @content;
+    }
+  }
+}
+//声明一个根据Key获取颜色的function
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+//暂时想到的常用的开发场景下面三种背景颜色、字体颜色、边框颜色  至于阴影什么之类的忽略了
+//获取背景颜色
+@mixin background_color($color) {
+  @include themeify {
+    background-color: themed($color);
+  }
+}
+//获取字体颜色
+@mixin font_color($color) {
+  @include themeify {
+    color: themed($color);
+  }
+}
+//获取边框颜色
+@mixin border_color($color) {
+  @include themeify {
+    border-color: themed($color);
+  }
+}
