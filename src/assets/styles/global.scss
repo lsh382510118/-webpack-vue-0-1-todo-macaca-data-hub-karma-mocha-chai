@@ -1,0 +1,20 @@
+.play {
+    background-image: url('../images/01.png');
+    background-repeat: no-repeat;
+    width: 64px;
+    height: 64px;
+}
+
+
+.flex {
+    display: flex;
+    border: solid #000 2px;
+    width: 300px;
+    height: 100px;
+
+    .flex-item {
+        flex: 1;
+        background-color: #1296db;
+        border: solid #fff 1px;
+    }
+}
